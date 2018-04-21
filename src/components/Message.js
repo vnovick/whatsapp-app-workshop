@@ -1,13 +1,17 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native'
+import * as Animatable from 'react-native-animatable';
+
 
 const Message = ({ item }) => (
-  <View style={[
+  <Animatable.View 
+    duration={100}
+    animation={item.incoming ? "slideInLeft" : "slideInRight" } style={[
       styles.message, item.incoming &&
       styles.incomingMessage
     ]}>
     <Text>{item.message}</Text>
-  </View>
+  </Animatable.View>
 )
 
 const styles = {
