@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, ImageBackground, StyleSheet, FlatList } from 'react-native'
+import { Text, View, StatusBar, StyleSheet, FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getChats } from '../services/api';
+import { ChatItem } from '../components/ChatItem';
 
 export class ChatsScreen extends Component {
 
@@ -17,24 +18,18 @@ export class ChatsScreen extends Component {
     });
   }
 
-  getChatItem(item){
-    return (
-      <View>
-        <Text>{item.title}</Text>
-      </View>
-    )
-  }
-
   render() {
     return (
-      <ImageBackground source={require('../assets/imgs/background.png')} style={styles.container}>
+      <View style={styles.container}>
         <FlatList
-          style={styles.container}
           data={this.state.chats}
-          renderItem={({ item }) => this.getChatItem(item)}
+          renderItem={ChatItem}
           keyExtractor={(item, index) => (`message-${index}`)}
+          ItemSeparatorComponent={() => (
+            <View style={styles.separator}/>
+          )}
         />
-      </ImageBackground>
+      </View>
     )
   }
 }
@@ -42,6 +37,9 @@ export class ChatsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%'
+  },
+  separator: {
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(0,0,0, .1)"
   }
 })

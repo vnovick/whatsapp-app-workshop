@@ -41,22 +41,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  welcome: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    width: '80%'
-  },
-  instructions: {
-    color: 'white',
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  workshopInstructions: {
-    alignItems: 'flex-start'
+    paddingTop: Platform.OS === 'ios' ? 20 : 0
   }
 });
