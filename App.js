@@ -7,40 +7,44 @@ import {
   Button,
   View
 } from 'react-native';
-
+import { StackNavigator, } from 'react-navigation';
 import { ChatsScreen, ChatViewScreen } from './src/screens'
 
 
-export default class App extends Component {
 
-  state = {
-    isChatsScreen: true
+const RootNavigator = StackNavigator({
+  chatsScreen: { screen: ChatsScreen },
+  chatView: { screen: ChatViewScreen }
+}, {
+  mode: "card",
+  initialRouteName: 'chatsScreen',
+  navigationOptions: {
+    headerStyle: {
+      backgroundColor: '#006655',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   }
+});
 
-  renderScreen() {
-    return this.state.isChatsScreen ? <ChatsScreen /> : <ChatViewScreen />
-  }
-  
-  render() {
+export default class App extends React.Component {
+  render(){
     return (
-      <View style={styles.container}>
-        { this.renderScreen() }
-        <View>
-          <Button title="Switch Screen" onPress={() => {
-              this.setState({
-                isChatsScreen: !this.state.isChatsScreen
-              })
-            }} 
-          />
-        </View>
+      <View style={styles.app}>
+        <StatusBar 
+          backgroundColor="#006655" 
+          barStyle="light-content" 
+        /> 
+        <RootNavigator/>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  app: {
     flex: 1,
-    paddingTop: Platform.OS === 'ios' ? 20 : 0
   }
-});
+})

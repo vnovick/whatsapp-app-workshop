@@ -1,11 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const ChatItem = ({ item }) => {
-  const imageUrl = { uri: item.avatar };
+export const ChatItem = ({ navigate, item: { 
+  id, avatar, title, description, date
+}}) => {
+  const imageUrl = { uri: avatar };
   return (
-    <View style={styles.chatItem}>
+    <TouchableOpacity 
+      style={styles.chatItem}  
+      onPress={() => navigate('chatView', { id, title })}
+    >
       <View style={styles.avatarContainer}>
         <Image 
           resizeMethod="scale"
@@ -14,14 +19,14 @@ export const ChatItem = ({ item }) => {
         />
       </View>
       <View style={styles.content}>
-        <Text style={styles.title}>Title</Text>
-        <Text style={styles.label}>Description</Text>
+        <Text style={styles.title}>{ title }</Text>
+        <Text style={styles.label}>{ description }</Text>
       </View>
       <View style={styles.navLabel}>
-        <Text style={styles.label}>Yesterday</Text>
+        <Text style={styles.label}>{ date }</Text>
         <Icon style={styles.arrow} name="chevron-right" size={20} />
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
