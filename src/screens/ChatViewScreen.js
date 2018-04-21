@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { 
-  Text, View, ImageBackground, FlatList, StyleSheet, KeyboardAvoidingView, Platform
+  Text, 
+  View, 
+  ImageBackground, 
+  FlatList, 
+  StyleSheet, 
+  KeyboardAvoidingView, 
+  Platform,
+  LayoutAnimation
 } from 'react-native'
 import { getMessagesById, postMessage } from '../services/api';
 import Compose from '../components/Compose'
@@ -16,12 +23,16 @@ export class ChatViewScreen extends Component {
     }
   }
 
+  componentWillUpdate() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+  }
+
   state = {
     messages: []
   }
 
   componentDidMount() {
-    getMessagesById().then((messages) => {
+    getMessagesById(this.props.navigation.state.id).then((messages) => {
       this.setState({
         messages
       })

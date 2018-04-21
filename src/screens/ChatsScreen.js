@@ -24,10 +24,6 @@ export class ChatsScreen extends Component {
     });
   }
 
-  componentWillUpdate() {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-  }
-
   render() {
     return (
       <View style={styles.container}>
