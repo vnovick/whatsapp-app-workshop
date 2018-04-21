@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, StatusBar, StyleSheet, FlatList } from 'react-native'
+import { Text, View, StatusBar, StyleSheet, FlatList, LayoutAnimation } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getChats } from '../services/api';
 import { ChatItem } from '../components/ChatItem';
+
 
 export class ChatsScreen extends Component {
 
@@ -11,7 +12,8 @@ export class ChatsScreen extends Component {
   };
 
   state = {
-    chats: []
+    chats: [],
+    index: 0
   }
 
   componentDidMount() {
@@ -20,6 +22,10 @@ export class ChatsScreen extends Component {
         chats
       })
     });
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   }
 
   render() {
