@@ -8,11 +8,13 @@ const AnimatedOpacityWrapper = createAnimatableComponent(TouchableOpacity)
 
 export class ChatItem extends React.Component {
   
-  animatedValue = new Animated.Value(0);
+  state = {
+    animatedValue: new Animated.Value(0)
+  }
 
   componentDidMount(){
     Animated.timing(
-      this.animatedValue,
+      this.state.animatedValue,
       {
         toValue: 1,
         duration: 300,
@@ -26,18 +28,19 @@ export class ChatItem extends React.Component {
     }} = this.props;
     const imageUrl = { uri: avatar };
     return (
-      <AnimatedOpacityWrapper 
-        style={[styles.chatItem, { 
-          opacity: this.animatedValue,
+      <Animated.View 
+        style={{ 
+          opacity: this.state.animatedValue,
           transform: [{ 
-            translateX: this.animatedValue.interpolate({
+            translateX: this.state.animatedValue.interpolate({
               inputRange: [0, 1],
               outputRange: [-100, 0]
             })
           }] 
-        }]}  
-        onPress={() => navigate('chatView', { id, title })}
+        }}  
       >
+      <TouchableOpacity onPress={() => navigate('chatView', { id, title })} 
+        style={styles.chatItem}>
         <View style={styles.avatarContainer} >
           <Image 
             resizeMethod="scale"
@@ -53,7 +56,8 @@ export class ChatItem extends React.Component {
           <Text style={styles.label}>{ date }</Text>
           <Icon style={styles.arrow} name="chevron-right" size={20} />
         </View>
-      </AnimatedOpacityWrapper>
+        </TouchableOpacity>
+      </Animated.View>
     )
   }
 }
