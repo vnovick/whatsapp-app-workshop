@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Animated } from 'react-native';
 import { createAnimatableComponent } from 'react-native-animatable';
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     resizeMode: 'stretch',
-    borderRadius: 20,
+    borderRadius: Platform.OS === 'ios' ?  20 : 100,
     width: 40,
     height: 40,
   },
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     flex: 5
   },
   navLabel: {
-    flex: 2,
+    flex: 3,
     alignItems: 'flex-end',
   },
   title: {

@@ -9,7 +9,7 @@ import {
   Platform,
   LayoutAnimation
 } from 'react-native'
-import { getMessagesById, postMessage } from '../services/api';
+import { getMessages, postMessage } from '../services/api';
 import Compose from '../components/Compose'
 import Message from '../components/Message'
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -24,19 +24,23 @@ export class ChatViewScreen extends Component {
   }
 
   componentWillUpdate() {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   }
 
   state = {
     messages: []
   }
 
+  componentWillUnmount() {
+    this.unsubscribeGetMessages();
+  }
+
   componentDidMount() {
-    getMessagesById(this.props.navigation.state.id).then((messages) => {
+    this.unsubscribeGetMessages = getMessages((snapshot) => {
       this.setState({
-        messages
+          messages: Object.values(snapshot.val())
       })
-    });
+    })
   }
 
 

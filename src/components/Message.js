@@ -1,18 +1,21 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native'
 import * as Animatable from 'react-native-animatable';
+import { USER_ID } from '../services/api';
 
-
-const Message = ({ item }) => (
-  <Animatable.View 
-    duration={100}
-    animation={item.incoming ? "slideInLeft" : "slideInRight" } style={[
-      styles.message, item.incoming &&
-      styles.incomingMessage
-    ]}>
-    <Text>{item.message}</Text>
-  </Animatable.View>
-)
+const Message = ({ item }) => {
+const incoming = item.userId !== USER_ID
+ return (
+   <Animatable.View 
+      duration={100}
+      animation={incoming ? "slideInLeft" : "slideInRight" } style={[
+        styles.message, incoming &&
+        styles.incomingMessage
+      ]}>
+      <Text>{item.message}</Text>
+    </Animatable.View>
+ )
+}
 
 const styles = {
   message: {

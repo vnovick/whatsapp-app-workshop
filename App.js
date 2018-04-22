@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { StackNavigator, } from 'react-navigation';
 import { ChatsScreen, ChatViewScreen } from './src/screens'
-
+import { initApi } from './src/services/api';
 
 
 const RootNavigator = StackNavigator({
@@ -30,6 +30,11 @@ const RootNavigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    initApi()
+  }
+  
   render(){
     return (
       <View style={styles.app}>
