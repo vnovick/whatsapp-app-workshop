@@ -24,12 +24,12 @@ Create real time database
  
  ```javascript
 export const initialize = () => firebase.initializeApp({
-  apiKey: "AIzaSyC7lVcKUG648uV2vJuSNdWT4QrLSMnXcS8",
-  authDomain: "devexperienceworkshop.firebaseapp.com",
-  databaseURL: "https://devexperienceworkshop.firebaseio.com",
-  projectId: "devexperienceworkshop",
-  storageBucket: "devexperienceworkshop.appspot.com",
-  messagingSenderId: "379805428343"
+  apiKey: "AIzaSyBtMmI7ORq_T7O-hH3KgNesG7OWautFAFA",
+  authDomain: "whatsapp-99f23.firebaseapp.com",
+  databaseURL: "https://whatsapp-99f23.firebaseio.com",
+  projectId: "whatsapp-99f23",
+  storageBucket: "whatsapp-99f23.appspot.com",
+  messagingSenderId: "781231398986"
 })
 
 // helper function to set listeners
