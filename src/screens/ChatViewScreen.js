@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { 
   Text, View, ImageBackground, FlatList, StyleSheet, KeyboardAvoidingView, Platform, LayoutAnimation
 } from 'react-native'
-import { getMessagesById, postMessage } from '../services/api';
+import { getMessages, postMessage } from '../services/api';
 import Compose from '../components/Compose'
 import Message from '../components/Message'
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -24,12 +24,16 @@ export class ChatViewScreen extends Component {
     messages: []
   }
 
+  componentWillUnmount() {
+    this.unsubscribeGetMessages();
+  }
+
   componentDidMount() {
-    getMessagesById().then((messages) => {
+    this.unsubscribeGetMessages = getMessages((snapshot) => {
       this.setState({
-        messages
+          messages: Object.values(snapshot.val())
       })
-    });
+    })
   }
 
 

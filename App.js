@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import { ChatsScreen, ChatViewScreen } from './src/screens'
+import { initApi } from './src/services/api';
+
 
 const AppNavigator = createStackNavigator({
   chatsScreen: {
@@ -35,6 +37,12 @@ const RootNavigator = createAppContainer(AppNavigator);
 
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    initApi()
+  }
+  
+  
   render(){
     return (
       <View style={styles.app}>
