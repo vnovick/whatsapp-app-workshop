@@ -1,68 +1,37 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
   StatusBar,
   StyleSheet,
   Text,
+  Button,
   View
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import { ChatsScreen, ChatViewScreen } from './src/screens'
 
-type Props = {};
-export default class App extends Component<Props> {
+
+export default class App extends Component {
+
+  state = {
+    isChatsScreen: true
+  }
+
+  renderScreen() {
+    return this.state.isChatsScreen ? <ChatsScreen /> : <ChatViewScreen />
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="light-content"/>
-        <Text style={styles.welcome}>
-          Welcome to React Native Workshop!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-        <Text style={styles.welcome}>
-          Assignment
-        </Text>
-        <View style={styles.workshopInstructions}>
-          <Text style={styles.instructions}>
-            1. Create src folder
-          </Text>
-          <Text style={styles.instructions}>
-            2. Create src/screens/ChatsScreen.js component
-          </Text>
-          <Text style={styles.instructions}>
-            3. Create src/screens/ChatViewScreen.js component
-          </Text>
-          <Text style={styles.instructions}>
-            4. Create src/components/Compose.js component
-          </Text>
-          <Text style={styles.instructions}>
-            5. Create src/components/Message.js component
-          </Text>
-          <Text style={styles.instructions}>
-            6. Create src/components/ChatItem.js component
-          </Text>
-          <Text style={styles.instructions}>
-            7. Create src/components/Avatar.js component
-          </Text>
-          <Text style={styles.instructions}>
-            8. Switch different screens in App.js by changing state
-          </Text>
+        { this.renderScreen() }
+        <View>
+          <Button title="Switch Screen" onPress={() => {
+              this.setState({
+                isChatsScreen: !this.state.isChatsScreen
+              })
+            }} 
+          />
         </View>
       </View>
     );
@@ -73,8 +42,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
+    alignItems: 'center'
   },
   welcome: {
     color: 'white',
