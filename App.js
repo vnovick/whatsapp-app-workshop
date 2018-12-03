@@ -2,62 +2,54 @@ import React, { Component } from 'react';
 import {
   Platform,
   StatusBar,
+  SafeAreaView,
   StyleSheet,
   Text,
   Button,
-  View,
-  SafeAreaView
+  View
 } from 'react-native';
-
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import { ChatsScreen, ChatViewScreen } from './src/screens'
 
-
-export default class App extends Component {
-
-  state = {
-    isChatsScreen: true
+const AppNavigator = createStackNavigator({
+  chatsScreen: {
+    screen: ChatsScreen
+  },
+  chatView: { 
+    screen: ChatViewScreen 
   }
-
-  renderScreen() {
-    return this.state.isChatsScreen ? <ChatsScreen /> : <ChatViewScreen />
+},{
+  initialRouteName: 'chatsScreen',
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: '#006655',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   }
-  
-  render() {
+});
+
+const RootNavigator = createAppContainer(AppNavigator);
+
+
+export default class App extends React.Component {
+  render(){
     return (
-      <SafeAreaView style={styles.container}>
-        { this.renderScreen() }
-        <View>
-          <Button title="Switch Screen" onPress={() => {
-              this.setState({
-                isChatsScreen: !this.state.isChatsScreen
-              })
-            }} 
-          />
-        </View>
-      </SafeAreaView>
-    );
+      <View style={styles.app}>
+        <StatusBar 
+          backgroundColor="#006655" 
+          barStyle="light-content" 
+        /> 
+        <RootNavigator/>
+      </View>
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  app: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  welcome: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    width: '80%'
-  },
-  instructions: {
-    color: 'white',
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  workshopInstructions: {
-    alignItems: 'flex-start'
   }
-});
+})

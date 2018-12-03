@@ -6,6 +6,10 @@ import { ChatItem } from '../components/ChatItem';
 
 export class ChatsScreen extends Component {
 
+  static navigationOptions = {
+    title: 'Chats'
+  };
+
   state = {
     chats: []
   }
@@ -23,7 +27,8 @@ export class ChatsScreen extends Component {
       <View style={styles.container}>
         <FlatList
           data={this.state.chats}
-          renderItem={ChatItem}
+          renderItem={({ item }) => (
+            <ChatItem item={item} navigate={this.props.navigation.navigate} />)}
           keyExtractor={(item, index) => (`message-${index}`)}
           ItemSeparatorComponent={() => (
             <View style={styles.separator}/>
@@ -37,7 +42,6 @@ export class ChatsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%'
   },
   separator: {
     borderBottomWidth: 1,
