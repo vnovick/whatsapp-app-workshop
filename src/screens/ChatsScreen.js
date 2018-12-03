@@ -1,12 +1,46 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, StatusBar, StyleSheet, FlatList } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { getChats } from '../services/api';
+import { ChatItem } from '../components/ChatItem';
 
 export class ChatsScreen extends Component {
+
+  state = {
+    chats: []
+  }
+
+  componentDidMount() {
+    getChats().then((chats) => {
+      this.setState({
+        chats
+      })
+    });
+  }
+
   render() {
     return (
-      <View>
-        <Text> ChatScreen </Text>
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.chats}
+          renderItem={ChatItem}
+          keyExtractor={(item, index) => (`message-${index}`)}
+          ItemSeparatorComponent={() => (
+            <View style={styles.separator}/>
+          )}
+        />
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%'
+  },
+  separator: {
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(0,0,0, .1)"
+  }
+})

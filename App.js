@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   Button,
-  View
+  View,
+  SafeAreaView
 } from 'react-native';
 
 import { ChatsScreen, ChatViewScreen } from './src/screens'
@@ -23,7 +24,7 @@ export default class App extends Component {
   
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         { this.renderScreen() }
         <View>
           <Button title="Switch Screen" onPress={() => {
@@ -33,7 +34,7 @@ export default class App extends Component {
             }} 
           />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
