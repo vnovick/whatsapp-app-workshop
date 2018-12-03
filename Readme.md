@@ -24,9 +24,9 @@ export const getChats = () => (
   new Promise(resolve => setTimeout(() => resolve(chats), 1000))
 )
 
-export const getMessagesById = (id) => {
+export const getMessages = () => (
   new Promise(resolve => setTimeout(() => resolve(mockMessages), 1000))
-}
+)
 ```
 
 - retrieve data in ChatsScreen on componentDidMount()
