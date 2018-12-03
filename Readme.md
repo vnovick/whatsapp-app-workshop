@@ -9,6 +9,8 @@
 
 ## Add Navigation to your app.
 
+Getting started: https://reactnavigation.org/docs/en/getting-started.html
+
 Ultimately screens should look as following
 
 ![ChatList](https://s3-us-west-2.amazonaws.com/vladjs-presentations/ChatList.png)
