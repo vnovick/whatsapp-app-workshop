@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { 
-  Text, View, ImageBackground, FlatList, StyleSheet, KeyboardAvoidingView, Platform
+  Text, View, ImageBackground, FlatList, StyleSheet, KeyboardAvoidingView, Platform, LayoutAnimation
 } from 'react-native'
 import { getMessagesById, postMessage } from '../services/api';
 import Compose from '../components/Compose'
@@ -15,6 +15,10 @@ export class ChatViewScreen extends Component {
       headerLeft: (<Icon name="chevron-left" size={40} color="#ffffff" onPress={() => navigation.goBack() } />)
     }
   }
+
+  // componentWillUpdate() {
+  //   LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+  // }
 
   state = {
     messages: []
